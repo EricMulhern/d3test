@@ -73,19 +73,36 @@ const data2 = [
   }
 ];
 
+function transform(arr) {
+  const transformed = [];
+  for (let i = 0; i < arr[0].values.length; i++) {
+    const entry = {
+      date: arr[0].values[i][0]
+    };
+    for (let j = 0; j < arr.length; j++) {
+      entry[arr[j].key] = arr[j].values[i][1];
+    }
+    transformed.push(entry);
+  }
+  return transformed;
+}
+const data2T = transform(data2);
+console.log(data2T)
+
 const data3 = [
-  {month: new Date(2018, 1, 1), apples: 10, bananas: 20, oranges: 15},
-  {month: new Date(2018, 2, 1), apples: 15, bananas: 15, oranges: 15},
-  {month: new Date(2018, 3, 1), apples: 20, bananas: 25, oranges: 15}
+  {date: new Date(2018, 1, 1), apples: 10, bananas: 20, oranges: 15},
+  {date: new Date(2018, 2, 1), apples: 15, bananas: 15, oranges: 15},
+  {date: new Date(2018, 3, 1), apples: 20, bananas: 25, oranges: 15}
 ];
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
+    <div style={{backgroundColor: "rgb(64,64,64)"}} className="App">
+      <div className="App-header">
         {/* <BarChart data={data} /> */}
         <StackedAreaChart data={data3} />
-      </header>
+        <StackedAreaChart data={data2T} />
+      </div>
     </div>
   );
 }
